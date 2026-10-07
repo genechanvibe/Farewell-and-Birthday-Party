@@ -1,0 +1,1219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Shenzhen Farewell & Birthday Bash!</title>
+
+  <!-- Firebase Modular SDK -->
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+    import { getDatabase, ref, push, onValue, set, remove } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js";
+
+    // Your Exact Firebase Configuration
+    const firebaseConfig = {
+      apiKey: "AIzaSyDNNIZDQV5fPlKOKUB8yNUc7ykDbiXfs3A",
+      authDomain: "farewell-and-bd-party.firebaseapp.com",
+      databaseURL: "https://farewell-and-bd-party-default-rtdb.asia-southeast1.firebasedatabase.app",
+      projectId: "farewell-and-bd-party",
+      storageBucket: "farewell-and-bd-party.firebasestorage.app",
+      messagingSenderId: "92840318473",
+      appId: "1:92840318473:web:47766a09fb2bf3bf47cad8",
+      measurementId: "G-YH7Q2N4K0S"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const db = getDatabase(app);
+
+    // Make Firebase functions available globally
+    window.db = db;
+    window.dbRef = ref;
+    window.dbPush = push;
+    window.dbOnValue = onValue;
+    window.dbSet = set;
+    window.dbRemove = remove;
+  </script>
+
+  <style>
+    :root {
+      --bg-dark: #0d0f17;
+      --card-bg: rgba(255, 255, 255, 0.05);
+      --accent-pink: #ff2a75;
+      --accent-purple: #8a2be2;
+      --accent-cyan: #00f0ff;
+      --text-main: #f0f0f8;
+      --text-muted: #a0a0b8;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    body {
+      background-color: var(--bg-dark);
+      color: var(--text-main);
+      overflow-x: hidden;
+      padding-bottom: 60px;
+    }
+
+    .bg-glow {
+      position: fixed;
+      top: -100px;
+      left: -100px;
+      width: 400px;
+      height: 400px;
+      background: radial-gradient(circle, rgba(255,42,117,0.3) 0%, rgba(0,0,0,0) 70%);
+      z-index: -1;
+      animation: float 8s infinite alternate ease-in-out;
+    }
+
+    .bg-glow-2 {
+      position: fixed;
+      bottom: -100px;
+      right: -100px;
+      width: 500px;
+      height: 500px;
+      background: radial-gradient(circle, rgba(138,43,226,0.3) 0%, rgba(0,0,0,0) 70%);
+      z-index: -1;
+      animation: float 10s infinite alternate ease-in-out;
+    }
+
+    @keyframes float {
+      0% { transform: translate(0, 0); }
+      100% { transform: translate(40px, 40px); }
+    }
+
+    header {
+      text-align: center;
+      padding: 50px 20px 30px;
+    }
+
+    header h1 {
+      font-size: 2.8rem;
+      background: linear-gradient(45deg, var(--accent-pink), var(--accent-cyan));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 10px;
+    }
+
+    header p {
+      color: var(--text-muted);
+      font-size: 1.1rem;
+    }
+
+    .container {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    .section-title {
+      font-size: 1.8rem;
+      margin: 40px 0 10px;
+      text-align: center;
+      position: relative;
+      color: var(--accent-cyan);
+    }
+
+    .section-subtitle {
+      text-align: center;
+      color: var(--text-muted);
+      font-size: 1rem;
+      margin-bottom: 8px;
+    }
+
+    .section-title::after {
+      content: '';
+      display: block;
+      width: 60px;
+      height: 3px;
+      background: var(--accent-pink);
+      margin: 8px auto 0;
+      border-radius: 2px;
+    }
+
+    .countdown-container {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      margin: 25px 0;
+    }
+
+    .time-box {
+      background: var(--card-bg);
+      border: 1px solid rgba(255,255,255,0.1);
+      backdrop-filter: blur(10px);
+      padding: 15px;
+      border-radius: 12px;
+      min-width: 80px;
+      text-align: center;
+    }
+
+    .time-box .num {
+      font-size: 2rem;
+      font-weight: bold;
+      color: var(--accent-pink);
+    }
+
+    .time-box .label {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      text-transform: uppercase;
+    }
+
+    .glass-card {
+      background: var(--card-bg);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(12px);
+      border-radius: 16px;
+      padding: 25px;
+      margin-bottom: 30px;
+      box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+    }
+
+    /* Farewell Section */
+    .farewell-hero {
+      text-align: center;
+    }
+
+    .farewell-img-wrapper {
+      position: relative;
+      max-width: 600px;
+      margin: 0 auto 15px;
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+      background: rgba(0,0,0,0.3);
+      min-height: 250px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .farewell-img-wrapper img {
+      width: 100%;
+      display: block;
+    }
+
+    .admin-controls {
+      display: none;
+      margin-top: 10px;
+      margin-bottom: 15px;
+      text-align: center;
+    }
+
+    .admin-btn {
+      background: rgba(255,255,255,0.1);
+      border: 1px solid rgba(255,255,255,0.2);
+      color: var(--text-muted);
+      padding: 6px 14px;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+
+    .admin-btn:hover {
+      background: rgba(255,255,255,0.2);
+      color: #fff;
+    }
+
+    /* BD Boy Flip Cards */
+    .bd-cards-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .bd-cards-grid {
+      display: flex;
+      justify-content: center;
+      gap: 30px;
+      flex-wrap: wrap;
+      margin-top: 20px;
+    }
+
+    .card-wrapper {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .flip-card {
+      background-color: transparent;
+      width: 220px;
+      height: 280px;
+      perspective: 1000px;
+      cursor: pointer;
+    }
+
+    .flip-card-inner {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      text-align: center;
+      transition: transform 0.8s;
+      transform-style: preserve-3d;
+    }
+
+    .flip-card:hover .flip-card-inner, .flip-card.flipped .flip-card-inner {
+      transform: rotateY(180deg);
+    }
+
+    .flip-card-front, .flip-card-back {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      -webkit-backface-visibility: hidden;
+      backface-visibility: hidden;
+      border-radius: 16px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid rgba(255,255,255,0.15);
+      padding: 15px;
+    }
+
+    .flip-card-front {
+      background: linear-gradient(135deg, rgba(255,42,117,0.2), rgba(138,43,226,0.2));
+      backdrop-filter: blur(10px);
+    }
+
+    .flip-card-front h3 {
+      font-size: 1.5rem;
+      margin-top: 10px;
+      color: #fff;
+    }
+
+    .flip-card-back {
+      background: #1a1d2e;
+      transform: rotateY(180deg);
+      overflow: hidden;
+    }
+
+    .flip-card-back img {
+      width: 100%;
+      height: 80%;
+      object-fit: cover;
+      border-radius: 8px;
+    }
+
+    .card-hint {
+      font-size: 0.8rem;
+      color: var(--accent-pink);
+      margin-top: 8px;
+    }
+
+    /* Timeline */
+    .timeline {
+      position: relative;
+      padding-left: 20px;
+      border-left: 2px solid var(--accent-pink);
+      margin: 20px 10px;
+    }
+
+    .timeline-item {
+      margin-bottom: 25px;
+      position: relative;
+      padding-left: 15px;
+    }
+
+    .timeline-item::before {
+      content: '';
+      position: absolute;
+      left: -26px;
+      top: 4px;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: var(--accent-cyan);
+      box-shadow: 0 0 10px var(--accent-cyan);
+    }
+
+    .time-badge {
+      display: inline-block;
+      padding: 2px 8px;
+      background: rgba(0,240,255,0.15);
+      color: var(--accent-cyan);
+      border-radius: 4px;
+      font-size: 0.85rem;
+      font-weight: bold;
+      margin-bottom: 5px;
+    }
+
+    .agenda-actions {
+      display: inline-block;
+      margin-left: 10px;
+    }
+
+    .agenda-action-btn {
+      background: transparent;
+      border: none;
+      color: var(--text-muted);
+      font-size: 0.75rem;
+      cursor: pointer;
+      margin-left: 5px;
+    }
+
+    .agenda-action-btn:hover {
+      color: var(--accent-pink);
+    }
+
+    .agenda-editor-card {
+      background: rgba(0, 0, 0, 0.4);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      padding: 15px;
+      border-radius: 10px;
+      margin-bottom: 15px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .agenda-editor-card input, .agenda-editor-card textarea {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.15);
+      color: #fff;
+      padding: 8px 12px;
+      border-radius: 6px;
+      font-size: 0.85rem;
+      outline: none;
+    }
+
+    .agenda-editor-btns {
+      display: flex;
+      gap: 10px;
+    }
+
+    .save-agenda-btn {
+      background: var(--accent-cyan);
+      color: #000;
+      border: none;
+      padding: 6px 14px;
+      border-radius: 6px;
+      font-weight: bold;
+      cursor: pointer;
+      font-size: 0.8rem;
+    }
+
+    .cancel-agenda-btn {
+      background: transparent;
+      border: 1px solid rgba(255,255,255,0.2);
+      color: var(--text-muted);
+      padding: 6px 14px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 0.8rem;
+    }
+
+    /* Gallery Grid */
+    .mosaic-gallery {
+      column-count: 3;
+      column-gap: 15px;
+      margin-top: 20px;
+    }
+
+    @media (max-width: 768px) {
+      .mosaic-gallery { column-count: 2; }
+    }
+
+    @media (max-width: 480px) {
+      .mosaic-gallery { column-count: 1; }
+    }
+
+    .mosaic-item {
+      break-inside: avoid;
+      margin-bottom: 15px;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 12px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+    }
+
+    .mosaic-item img, .mosaic-item video {
+      width: 100%;
+      height: auto;
+      display: block;
+      object-fit: cover;
+    }
+
+    .delete-media-btn {
+      position: absolute;
+      top: 8px;
+      right: 8px;
+      background: rgba(255, 42, 117, 0.85);
+      color: #fff;
+      border: none;
+      border-radius: 20px;
+      padding: 4px 10px;
+      font-size: 0.75rem;
+      cursor: pointer;
+      backdrop-filter: blur(4px);
+      z-index: 2;
+    }
+
+    .caption-container {
+      padding: 10px;
+    }
+
+    .caption-text {
+      font-size: 0.85rem;
+      color: var(--text-main);
+      margin-bottom: 5px;
+      word-break: break-word;
+    }
+
+    .caption-input {
+      width: 100%;
+      background: rgba(0,0,0,0.4);
+      border: 1px solid rgba(255,255,255,0.15);
+      color: #fff;
+      padding: 6px 10px;
+      border-radius: 6px;
+      font-size: 0.8rem;
+      outline: none;
+      margin-top: 5px;
+    }
+
+    .upload-notice {
+      text-align: center;
+      font-size: 0.85rem;
+      color: var(--accent-cyan);
+      margin-bottom: 20px;
+    }
+
+    .upload-btn-wrapper {
+      text-align: center;
+      margin-bottom: 25px;
+    }
+
+    .upload-btn {
+      background: linear-gradient(45deg, var(--accent-pink), var(--accent-purple));
+      color: #fff;
+      padding: 12px 25px;
+      border: none;
+      border-radius: 30px;
+      font-size: 1rem;
+      font-weight: bold;
+      cursor: pointer;
+      box-shadow: 0 4px 15px rgba(255,42,117,0.4);
+      transition: transform 0.2s;
+    }
+
+    .upload-btn:hover {
+      transform: scale(1.05);
+    }
+
+    /* Wishing Board */
+    .wish-input-area {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-bottom: 25px;
+    }
+
+    .wish-input-area input, .wish-input-area textarea {
+      background: rgba(0,0,0,0.3);
+      border: 1px solid rgba(255,255,255,0.15);
+      color: #fff;
+      padding: 12px;
+      border-radius: 8px;
+      outline: none;
+    }
+
+    .wish-submit-btn {
+      background: var(--accent-cyan);
+      color: #000;
+      font-weight: bold;
+      padding: 12px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 1rem;
+    }
+
+    .wish-remark {
+      text-align: center;
+      font-size: 0.8rem;
+      color: var(--accent-pink);
+      margin-top: -4px;
+      margin-bottom: 10px;
+    }
+
+    .wishes-container {
+      position: relative;
+      min-height: 180px;
+    }
+
+    .wish-card {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.08);
+      padding: 15px;
+      border-radius: 10px;
+      margin-bottom: 10px;
+      position: relative;
+    }
+
+    .wish-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 5px;
+    }
+
+    .wish-author {
+      font-weight: bold;
+      color: var(--accent-pink);
+      font-size: 0.9rem;
+    }
+
+    .delete-wish-btn {
+      background: rgba(255, 42, 117, 0.2);
+      border: 1px solid rgba(255, 42, 117, 0.4);
+      color: var(--accent-pink);
+      border-radius: 12px;
+      padding: 2px 8px;
+      font-size: 0.75rem;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+
+    .delete-wish-btn:hover {
+      background: rgba(255, 42, 117, 0.8);
+      color: #fff;
+    }
+
+    .locked-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      min-height: 200px;
+      background: rgba(13, 15, 23, 0.92);
+      backdrop-filter: blur(10px);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      border-radius: 12px;
+      text-align: center;
+      padding: 25px 15px;
+      z-index: 5;
+    }
+
+    .lock-icon {
+      font-size: 2.2rem;
+      margin-bottom: 8px;
+    }
+
+    .locked-date-text {
+      font-size: 0.85rem;
+      line-height: 1.4;
+      color: var(--accent-pink);
+      font-weight: 700;
+      display: block;
+      margin-top: 4px;
+    }
+
+    .toggle-lock-btn {
+      margin-top: 15px;
+      background: transparent;
+      border: 1px dashed var(--text-muted);
+      color: var(--text-muted);
+      padding: 5px 12px;
+      border-radius: 6px;
+      font-size: 0.75rem;
+      cursor: pointer;
+      display: none;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="bg-glow"></div>
+  <div class="bg-glow-2"></div>
+
+  <header>
+    <h1>Shenzhen Farewell & Birthday Bash 🎉</h1>
+    <p>Honoring 3 Legend Colleagues & Celebrating 2 Birthday Boys!</p>
+    
+    <div class="countdown-container">
+      <div class="time-box"><div class="num" id="days">00</div><div class="label">Days</div></div>
+      <div class="time-box"><div class="num" id="hours">00</div><div class="label">Hours</div></div>
+      <div class="time-box"><div class="num" id="mins">00</div><div class="label">Mins</div></div>
+      <div class="time-box"><div class="num" id="secs">00</div><div class="label">Secs</div></div>
+    </div>
+  </header>
+
+  <div class="container">
+
+    <!-- Farewell Section -->
+    <div class="glass-card farewell-hero">
+      <h2 style="margin-bottom: 15px; color: var(--accent-pink);">Farewell to Our 3 Beloved Colleagues</h2>
+      
+      <div class="farewell-img-wrapper">
+        <img id="farewellImg" src="image.png" alt="Farewell Trio" onerror="this.style.display='none'; document.getElementById('placeholderText').style.display='block';">
+        <div id="placeholderText" style="display:none; color: var(--text-muted); padding: 40px;">
+          📷 Tap "Admin: Change Photo" below to upload the Farewell Trio picture directly!
+        </div>
+      </div>
+
+      <!-- Admin Controls -->
+      <div class="admin-controls">
+        <input type="file" id="adminHeroInput" accept="image/*" style="display: none;" onchange="handleAdminHeroUpload(event)">
+        <button class="admin-btn" id="heroBtn" onclick="document.getElementById('adminHeroInput').click()">🔒 Admin: Change Photo</button>
+        <button class="admin-btn" onclick="resetAdminHero()">Reset Photo</button>
+      </div>
+
+      <p style="color: var(--text-muted); line-height: 1.6;">
+        Sending off our favorite team members with unforgettable memories! Thank you for all the amazing work, late nights, and endless laughs.
+      </p>
+    </div>
+
+    <!-- Birthday Boys Section -->
+    <h2 class="section-title">Birthday Boys 🎂</h2>
+    <p style="text-align: center; color: var(--text-muted); margin-bottom: 15px;">Click or hover over the cards to reveal who's celebrating!</p>
+    
+    <div class="bd-cards-container">
+      <div class="bd-cards-grid">
+        <!-- Birthday Boy #1 -->
+        <div class="card-wrapper">
+          <div class="flip-card" onclick="this.classList.toggle('flipped')">
+            <div class="flip-card-inner">
+              <div class="flip-card-front">
+                <div style="font-size: 3rem;">🎁</div>
+                <h3>BD Boy #1</h3>
+                <span class="card-hint">Tap to Reveal</span>
+              </div>
+              <div class="flip-card-back">
+                <img id="bd1Img" src="image_2.png" alt="Ryan">
+                <h4 style="margin-top: 8px; color: var(--accent-cyan);">Ryan 🎉</h4>
+              </div>
+            </div>
+          </div>
+          <div class="admin-controls">
+            <input type="file" id="adminBd1Input" accept="image/*" style="display: none;" onchange="handleAdminCardUpload(event, 'bd1')">
+            <button class="admin-btn" id="bd1Btn" style="margin-top: 10px;" onclick="document.getElementById('adminBd1Input').click()">🔒 Change Photo</button>
+            <button class="admin-btn" style="margin-top: 5px;" onclick="resetAdminCard('bd1', 'image_2.png')">Reset</button>
+          </div>
+        </div>
+
+        <!-- Birthday Boy #2 -->
+        <div class="card-wrapper">
+          <div class="flip-card" onclick="this.classList.toggle('flipped')">
+            <div class="flip-card-inner">
+              <div class="flip-card-front">
+                <div style="font-size: 3rem;">🥳</div>
+                <h3>BD Boy #2</h3>
+                <span class="card-hint">Tap to Reveal</span>
+              </div>
+              <div class="flip-card-back">
+                <img id="bd2Img" src="image_3.png" alt="SEA">
+                <h4 style="margin-top: 8px; color: var(--accent-pink);">SEA 🎂</h4>
+              </div>
+            </div>
+          </div>
+          <div class="admin-controls">
+            <input type="file" id="adminBd2Input" accept="image/*" style="display: none;" onchange="handleAdminCardUpload(event, 'bd2')">
+            <button class="admin-btn" id="bd2Btn" style="margin-top: 10px;" onclick="document.getElementById('adminBd2Input').click()">🔒 Change Photo</button>
+            <button class="admin-btn" style="margin-top: 5px;" onclick="resetAdminCard('bd2', 'image_3.png')">Reset</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Agenda Timeline Section -->
+    <h2 class="section-title">Party Agenda 🕒</h2>
+    <div class="glass-card">
+      <div class="admin-controls" style="margin-bottom: 20px;">
+        <button class="admin-btn" onclick="addNewAgendaForm()">➕ Add Agenda Item</button>
+        <button class="admin-btn" onclick="resetAgenda()">Reset Default Agenda</button>
+      </div>
+
+      <div class="timeline" id="agendaTimeline"></div>
+    </div>
+
+    <!-- Memory Board -->
+    <h2 class="section-title">Memory Board 📸</h2>
+    <p class="section-subtitle">Upload our memories together! We are leaving but memories are forever☺🫣</p>
+    <p class="upload-notice">pictures and videos might take a bit of time to upload🙏we will appreciate every memories!</p>
+    
+    <div class="glass-card">
+      <div class="upload-btn-wrapper">
+        <input type="file" id="mediaUpload" accept="image/*,video/*" multiple style="display: none;" onchange="handleFileUpload(event)">
+        <button class="upload-btn" id="uploadBtn" onclick="document.getElementById('mediaUpload').click()">➕ Upload Photos / Videos</button>
+      </div>
+
+      <div class="mosaic-gallery" id="galleryGrid"></div>
+    </div>
+
+    <!-- Locked Birthday Wishing Board -->
+    <h2 class="section-title">Birthday Wish Board 💌</h2>
+    <div class="glass-card">
+      <div class="wish-input-area">
+        <input type="text" id="wishName" placeholder="Your Name / Nickname">
+        <textarea id="wishMessage" rows="3" placeholder="Write a secret birthday wish for Ryan & SEA..."></textarea>
+        <button class="wish-submit-btn" onclick="submitWish()">Send Them Wishes! 🚀</button>
+        <p class="wish-remark">✨ Every wish will be unlocked and public for everyone to see after midnight at the event! ✨</p>
+      </div>
+
+      <div class="wishes-container" id="wishesContainer">
+        <div class="locked-overlay" id="lockedOverlay">
+          <div class="lock-icon">🔒</div>
+          <h3 style="color: #fff; margin-bottom: 6px; font-size: 1.1rem;">Wishes are Time-Locked!</h3>
+          <p style="color: var(--text-muted); font-size: 0.85rem; line-height: 1.5; padding: 0 10px;">
+            Wishes will automatically unlock on <br>
+            <span class="locked-date-text">October 10th at 00:00 AM (Midnight)</span>
+          </p>
+          <button class="toggle-lock-btn" id="toggleLockBtn" onclick="toggleLockPreview()">[Host Mode] Toggle Lock Preview</button>
+        </div>
+
+        <div id="wishesList"></div>
+      </div>
+    </div>
+
+  </div>
+
+  <script>
+    // Cloudinary Credentials
+    const CLOUD_NAME = "b1rvkhyr"; 
+    const UPLOAD_PRESET = "ml_default"; 
+
+    const targetDate = new Date("October 10, 2026 00:00:00").getTime();
+
+    function updateCountdown() {
+      const now = new Date().getTime();
+      const distance = targetDate - now;
+
+      if (distance < 0) {
+        document.getElementById("days").innerText = "00";
+        document.getElementById("hours").innerText = "00";
+        document.getElementById("mins").innerText = "00";
+        document.getElementById("secs").innerText = "00";
+        unlockWishes();
+        return;
+      }
+
+      const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+      document.getElementById("days").innerText = days.toString().padStart(2, '0');
+      document.getElementById("hours").innerText = hours.toString().padStart(2, '0');
+      document.getElementById("mins").innerText = minutes.toString().padStart(2, '0');
+      document.getElementById("secs").innerText = seconds.toString().padStart(2, '0');
+    }
+
+    setInterval(updateCountdown, 1000);
+    updateCountdown();
+
+    const defaultAgenda = [
+      { time: "19:30 PM", title: "Farewell & Birthday Dinner Gather", desc: "Hotpot dinner, toasts, and memory sharing with the whole squad." },
+      { time: "22:15 PM", title: "Photo Ops & Departure to Club", desc: "Group photos and private transit towards Shenzhen nightlife district." },
+      { time: "23:00 PM - Late", title: "Crazy Clubbing @ Sauce (Shenzhen) 🍾🪩", desc: "Table reserved at Sauce Club. Dance, drinks, and midnight birthday countdown!" },
+      { time: "00:00 AM (Midnight, Oct 10)", title: "Birthday Wish Reveal Unlocked! ✨", desc: "Unlocking all secret messages submitted for Ryan & SEA on the Wishing Board." }
+    ];
+
+    let agendaData = defaultAgenda;
+    let isAdminMode = false;
+    let editingIndex = -1;
+
+    // Initialization & Firebase Global Realtime Listeners
+    window.addEventListener('load', () => {
+      const urlParams = new URLSearchParams(window.location.search);
+      isAdminMode = urlParams.get('admin') === 'true';
+
+      if (isAdminMode) {
+        document.querySelectorAll('.admin-controls').forEach(el => el.style.display = 'block');
+        const toggleBtn = document.getElementById('toggleLockBtn');
+        if (toggleBtn) toggleBtn.style.display = 'inline-block';
+      }
+
+      listenToFirebaseAgenda();
+      listenToFirebaseMemories();
+      listenToFirebaseWishes();
+      listenToFirebaseCardImages();
+    });
+
+    // --- REALTIME FIREBASE: HERO & CARD IMAGES ---
+    function listenToFirebaseCardImages() {
+      const heroRef = window.dbRef(window.db, 'card_images/hero');
+      window.dbOnValue(heroRef, (snapshot) => {
+        const url = snapshot.val();
+        const img = document.getElementById('farewellImg');
+        const placeholder = document.getElementById('placeholderText');
+        if (url) {
+          img.src = url;
+          img.style.display = 'block';
+          placeholder.style.display = 'none';
+        } else {
+          img.src = 'image.png';
+          img.style.display = 'block';
+          placeholder.style.display = 'none';
+        }
+      });
+
+      const bd1Ref = window.dbRef(window.db, 'card_images/bd1');
+      window.dbOnValue(bd1Ref, (snapshot) => {
+        const url = snapshot.val();
+        document.getElementById('bd1Img').src = url || 'image_2.png';
+      });
+
+      const bd2Ref = window.dbRef(window.db, 'card_images/bd2');
+      window.dbOnValue(bd2Ref, (snapshot) => {
+        const url = snapshot.val();
+        document.getElementById('bd2Img').src = url || 'image_3.png';
+      });
+    }
+
+    function handleAdminHeroUpload(event) {
+      const file = event.target.files[0];
+      if (!file) return;
+
+      const btn = document.getElementById('heroBtn');
+      btn.innerText = "Uploading Hero Photo...";
+      btn.disabled = true;
+
+      const formData = new FormData();
+      formData.append("file", file);
+      formData.append("upload_preset", UPLOAD_PRESET);
+
+      fetch(`https://api.cloudinary.com/v1_1/${CLOUD_NAME}/image/upload`, {
+        method: "POST",
+        body: formData
+      })
+      .then(res => res.json())
+      .then(data => {
+        window.dbSet(window.dbRef(window.db, 'card_images/hero'), data.secure_url);
+      })
+      .catch(err => alert("Upload failed!"))
+      .finally(() => {
+        btn.innerText = "🔒 Admin: Change Photo";
+        btn.disabled = false;
+      });
+    }
+
+    function resetAdminHero() {
+      window.dbRemove(window.dbRef(window.db, 'card_images/hero'));
+    }
+
+    function handleAdminCardUpload(event, cardKey) {
+      const file = event.target.files[0];
+      if (!file) return;
+
+      const btn = document.getElementById(`${cardKey}Btn`);
+      btn.innerText = "Uploading...";
+      btn.disabled = true;
+
+      const formData = new FormData();
+      formData.append("file", file);
+      formData.append("upload_preset", UPLOAD_PRESET);
+
+      fetch(`https://api.cloudinary.com/v1_1/${CLOUD_NAME}/image/upload`, {
+        method: "POST",
+        body: formData
+      })
+      .then(res => res.json())
+      .then(data => {
+        window.dbSet(window.dbRef(window.db, `card_images/${cardKey}`), data.secure_url);
+      })
+      .catch(err => alert("Upload failed!"))
+      .finally(() => {
+        btn.innerText = "🔒 Change Photo";
+        btn.disabled = false;
+      });
+    }
+
+    function resetAdminCard(cardKey, defaultSrc) {
+      window.dbRemove(window.dbRef(window.db, `card_images/${cardKey}`));
+    }
+
+    // --- REALTIME FIREBASE: PARTY AGENDA ---
+    function listenToFirebaseAgenda() {
+      const agendaRef = window.dbRef(window.db, 'agenda');
+      window.dbOnValue(agendaRef, (snapshot) => {
+        const data = snapshot.val();
+        if (data) {
+          agendaData = Array.isArray(data) ? data : Object.values(data);
+        } else {
+          agendaData = defaultAgenda;
+        }
+        renderAgenda();
+      });
+    }
+
+    function saveAgendaToFirebase() {
+      window.dbSet(window.dbRef(window.db, 'agenda'), agendaData);
+    }
+
+    function renderAgenda() {
+      const container = document.getElementById('agendaTimeline');
+      container.innerHTML = '';
+
+      agendaData.forEach((item, index) => {
+        if (editingIndex === index) {
+          const editDiv = document.createElement('div');
+          editDiv.className = 'agenda-editor-card';
+          editDiv.innerHTML = `
+            <input type="text" id="editTimeInput" value="${item.time}" placeholder="Time (e.g. 19:30 PM)">
+            <input type="text" id="editTitleInput" value="${item.title}" placeholder="Event Title">
+            <textarea id="editDescInput" rows="2" placeholder="Event Description">${item.desc}</textarea>
+            <div class="agenda-editor-btns">
+              <button class="save-agenda-btn" onclick="saveInlineAgenda(${index})">Save</button>
+              <button class="cancel-agenda-btn" onclick="cancelInlineAgenda()">Cancel</button>
+            </div>
+          `;
+          container.appendChild(editDiv);
+        } else {
+          const itemDiv = document.createElement('div');
+          itemDiv.className = 'timeline-item';
+
+          let adminActions = '';
+          if (isAdminMode) {
+            adminActions = `
+              <span class="agenda-actions">
+                <button class="agenda-action-btn" onclick="startEditingAgenda(${index})">✏️ Edit</button>
+                <button class="agenda-action-btn" onclick="deleteAgendaItem(${index})">🗑 Delete</button>
+              </span>
+            `;
+          }
+
+          itemDiv.innerHTML = `
+            <span class="time-badge">${item.time}</span> ${adminActions}
+            <h3>${item.title}</h3>
+            <p style="color: var(--text-muted); margin-top: 5px;">${item.desc}</p>
+          `;
+          container.appendChild(itemDiv);
+        }
+      });
+    }
+
+    function startEditingAgenda(index) {
+      editingIndex = index;
+      renderAgenda();
+    }
+
+    function cancelInlineAgenda() {
+      editingIndex = -1;
+      renderAgenda();
+    }
+
+    function saveInlineAgenda(index) {
+      const time = document.getElementById('editTimeInput').value.trim();
+      const title = document.getElementById('editTitleInput').value.trim();
+      const desc = document.getElementById('editDescInput').value.trim();
+
+      if (!time || !title) {
+        alert("Time and Title cannot be empty!");
+        return;
+      }
+
+      if (index === -1) {
+        agendaData.push({ time, title, desc });
+      } else {
+        agendaData[index] = { time, title, desc };
+      }
+
+      editingIndex = -1;
+      saveAgendaToFirebase();
+    }
+
+    function addNewAgendaForm() {
+      agendaData.push({ time: "20:00 PM", title: "New Activity Title", desc: "Activity details..." });
+      editingIndex = agendaData.length - 1;
+      renderAgenda();
+    }
+
+    function deleteAgendaItem(index) {
+      if (confirm("Delete this agenda item?")) {
+        agendaData.splice(index, 1);
+        if (editingIndex === index) editingIndex = -1;
+        saveAgendaToFirebase();
+      }
+    }
+
+    function resetAgenda() {
+      if (confirm("Reset agenda back to default?")) {
+        agendaData = [...defaultAgenda];
+        editingIndex = -1;
+        saveAgendaToFirebase();
+      }
+    }
+
+    // --- REALTIME FIREBASE: MEMORY GALLERY ---
+    function listenToFirebaseMemories() {
+      const memoriesRef = window.dbRef(window.db, 'memories');
+      window.dbOnValue(memoriesRef, (snapshot) => {
+        const data = snapshot.val();
+        const grid = document.getElementById('galleryGrid');
+        grid.innerHTML = '';
+
+        if (data) {
+          Object.keys(data).forEach((key) => {
+            const item = data[key];
+            const itemDiv = document.createElement('div');
+            itemDiv.className = 'mosaic-item';
+
+            if (isAdminMode) {
+              const delBtn = document.createElement('button');
+              delBtn.className = 'delete-media-btn';
+              delBtn.innerText = '🗑️ Remove';
+              delBtn.onclick = () => window.dbRemove(window.dbRef(window.db, `memories/${key}`));
+              itemDiv.appendChild(delBtn);
+            }
+
+            if (item.type === 'image') {
+              const img = document.createElement('img');
+              img.src = item.src;
+              itemDiv.appendChild(img);
+            } else {
+              const video = document.createElement('video');
+              video.src = item.src;
+              video.controls = true;
+              itemDiv.appendChild(video);
+            }
+
+            if (item.caption || isAdminMode) {
+              const captionContainer = document.createElement('div');
+              captionContainer.className = 'caption-container';
+
+              if (item.caption) {
+                const captionText = document.createElement('div');
+                captionText.className = 'caption-text';
+                captionText.innerText = item.caption;
+                captionContainer.appendChild(captionText);
+              } else if (isAdminMode) {
+                const captionInput = document.createElement('input');
+                captionInput.type = 'text';
+                captionInput.className = 'caption-input';
+                captionInput.placeholder = 'Add caption...';
+                captionInput.onchange = function() {
+                  window.dbSet(window.dbRef(window.db, `memories/${key}/caption`), this.value.trim());
+                };
+                captionContainer.appendChild(captionInput);
+              }
+
+              itemDiv.appendChild(captionContainer);
+            }
+
+            grid.appendChild(itemDiv);
+          });
+        }
+      });
+    }
+
+    function handleFileUpload(event) {
+      const files = event.target.files;
+      if (!files || !files.length) return;
+
+      const uploadBtn = document.getElementById('uploadBtn');
+      uploadBtn.innerText = "Uploading to Cloud...";
+      uploadBtn.disabled = true;
+
+      Array.from(files).forEach(file => {
+        const formData = new FormData();
+        formData.append("file", file);
+        formData.append("upload_preset", UPLOAD_PRESET);
+
+        const resourceType = file.type.startsWith("video/") ? "video" : "image";
+
+        fetch(`https://api.cloudinary.com/v1_1/${CLOUD_NAME}/${resourceType}/upload`, {
+          method: "POST",
+          body: formData
+        })
+        .then(res => res.json())
+        .then(data => {
+          const memoriesRef = window.dbRef(window.db, 'memories');
+          window.dbPush(memoriesRef, {
+            type: resourceType,
+            src: data.secure_url,
+            caption: '',
+            createdAt: Date.now()
+          });
+        })
+        .catch(err => alert("Upload failed! Please try again."))
+        .finally(() => {
+          uploadBtn.innerText = "➕ Upload Photos / Videos";
+          uploadBtn.disabled = false;
+        });
+      });
+    }
+
+    // --- REALTIME FIREBASE: WISHING BOARD ---
+    function listenToFirebaseWishes() {
+      const wishesRef = window.dbRef(window.db, 'wishes');
+      window.dbOnValue(wishesRef, (snapshot) => {
+        const data = snapshot.val();
+        const list = document.getElementById('wishesList');
+        list.innerHTML = '';
+
+        if (data) {
+          Object.keys(data).forEach((key) => {
+            const wish = data[key];
+            const card = document.createElement('div');
+            card.className = 'wish-card';
+
+            let adminDeleteBtn = '';
+            if (isAdminMode) {
+              adminDeleteBtn = `<button class="delete-wish-btn" onclick="deleteWish('${key}')">🗑️ Remove</button>`;
+            }
+
+            card.innerHTML = `
+              <div class="wish-header">
+                <div class="wish-author">From: ${wish.name}</div>
+                ${adminDeleteBtn}
+              </div>
+              <div>${wish.message}</div>
+            `;
+            list.appendChild(card);
+          });
+        }
+      });
+    }
+
+    function deleteWish(key) {
+      if (confirm("Are you sure you want to delete this wish?")) {
+        window.dbRemove(window.dbRef(window.db, `wishes/${key}`));
+      }
+    }
+
+    function submitWish() {
+      const name = document.getElementById('wishName').value.trim();
+      const message = document.getElementById('wishMessage').value.trim();
+
+      if (!name || !message) {
+        alert("Please enter both your name and message!");
+        return;
+      }
+
+      const wishesRef = window.dbRef(window.db, 'wishes');
+      window.dbPush(wishesRef, { name, message, createdAt: Date.now() });
+
+      document.getElementById('wishName').value = '';
+      document.getElementById('wishMessage').value = '';
+      alert("Your wish has been saved! It will be revealed publicly after midnight on Oct 10th.");
+    }
+
+    let isPreviewUnlocked = false;
+    function toggleLockPreview() {
+      const overlay = document.getElementById('lockedOverlay');
+      isPreviewUnlocked = !isPreviewUnlocked;
+      overlay.style.display = isPreviewUnlocked ? 'none' : 'flex';
+    }
+
+    function unlockWishes() {
+      const overlay = document.getElementById('lockedOverlay');
+      if (overlay) overlay.style.display = 'none';
+    }
+  </script>
+</body>
+</html>
